@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WEB1 - HTML</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style>
+      body {
+        margin: 0px;
+      }
+
+      h1 {
+        font-size: 50px;
+        text-align: center;
+        border-bottom: 2px solid gray;
+        margin: 0px;
+        padding: 20px;
+      }
+
+      #grid {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+      }
+
+      /* 모든 ol중 부모가 grid인 것을 찾는다. */
+      #grid ol {
+        border-right: 2px solid gray;
+        /* width: 100px; */
+        margin: 0px;
+        padding: 25px;
+      }
+
+      #active {
+        color: cadetblue;
+      }
+
+      #contents {
+        padding: 25px;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      ul {
+        font-size: medium;
+      }
+
+      @media (max-width: 800px) {
+        #grid {
+          display: block;
+        }
+        #grid ol {
+          border-right: none;
+        }
+        h1 {
+          border-bottom: none;
+        }
+      }
+    </style> -->
+  </head>
+
+  <body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    <div id="grid">
+      <ol>
+        <li><a href="1.html" id="active">HTML</a></li>
+        <li><a href="2.html">CSS</a></li>
+        <li><a href="3.html">JavaScript</a></li>
+      </ol>
+
+      <div id="contents">
+        <h2>HTML이란 무엇인가?</h2>
+        <a
+          href="https://www.w3.org/TR/html52/"
+          target="_blank"
+          title="html5 specification"
+          >Hypertext Markup Language (HTML)</a
+        >
+        is the standard markup language for
+        <strong>creating <u>web</u> pages</strong> and web applications.
+        <br />This is br tag. Just for new line.<br />
+        <img src="33181.jpeg" />
+
+        <h2>Tags</h2>
+        <ul>
+          <li>
+            p tag
+            <p style="margin-top: 10px">
+              This is p tag. p means 'paragaph'. style="margin-top:10px;" is css
+              syntax.
+            </p>
+          </li>
+          <li>
+            h tag h1 ~ h6 tags have purpose for makeing header. Higher number
+            has smaller size of text.<br />
+            <h2>h2 Tag</h2>
+            <h3>h3 Tag</h3>
+            <h4>h4 Tag</h4>
+            <h5>h5 Tag</h5>
+            <h6>h6 Tag</h6>
+          </li>
+          <li>
+            strong tag<br />
+            <strong>strong tag</strong> has purpose for making bold text.
+          </li>
+          <li>
+            u tag<br />
+            <u>u tag</u> has purpose for making line under the text.
+          </li>
+          <li>
+            ol tag<br />
+            ol tag means 'ordered list' and ul tag means 'unordered list'. ol
+            tag numbers members of list.
+            <ol>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ol>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

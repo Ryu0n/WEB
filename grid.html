@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+      #grid {
+        border: 3px solid pink;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 가로로 1:1 비율 유지 */
+      }
+      div {
+        border: 3px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- div 태그는 무색, 무취의 디자인만을 위한 태그이다. -->
+    <!-- span 태그도 마찬가지다. 그러나 이 둘의 차이점은.. -->
+    <!-- div : block level, span : inline level -->
+    <div id="grid">
+      <div>NAVIGATION</div>
+      <div>ARTICLE</div>
+    </div>
+    <!-- <span>NAVIGATION</span>
+    <span>ARTICLE</span> -->
+
+    <!--grid 기술은 레이아웃을 편리하게 디자인하기 위한 기술이다.-->
+    <!--grid 기술을 사용하기 위해서는 배치할 요소들의 부모 태그가 필요하다.-->
+    <!--그래서 두 개의 div태그에 대한 grid id를 갖는 div 부모 태그를 생성했다.-->
+  </body>
+</html>
