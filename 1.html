@@ -22,7 +22,7 @@
         grid-template-columns: 150px 1fr;
       }
 
-      /* 모든 ol중 부모가 grid인 것을 찾는다. */
+      /* 모든 ol중 부모id가 grid인 것을 찾는다. */
       #grid ol {
         border-right: 2px solid gray;
         /* width: 100px; */
@@ -64,17 +64,54 @@
   <body>
     <h1><a href="index.html">WEB</a></h1>
 
-    <input
+    <!-- <input
       type="button"
-      value="Night Mode"
-      onclick="document.querySelector('body').style.backgroundColor='black';
-      document.querySelector('body').style.color='white';"
+      value="Night"
+      onclick="
+      document.querySelector('body').style.backgroundColor = 'black';
+      document.querySelector('body').style.color = 'white';"
     />
+
     <input
       type="button"
-      value="Daylight Mode"
-      onclick="document.querySelector('body').style.backgroundColor='white';
-    document.querySelector('body').style.color='black';"
+      value="Daylight"
+      onclick="
+    document.querySelector('body').style.backgroundColor = 'white';
+    document.querySelector('body').style.color = 'black';"
+    /> -->
+
+    <input
+      id="night_day"
+      type="button"
+      value="Night"
+      onclick="
+      if (document.querySelector('#night_day').value == 'Night'){
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';
+        document.querySelector('#night_day').value = 'Daylight';
+      }else{
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';
+        document.querySelector('#night_day').value = 'Night';
+      }
+      "
+    />
+
+    <input
+      type="button"
+      value="Night"
+      onclick="
+      var target = document.querySelector('body');
+    if (this.value == 'Night'){
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
+      this.value = 'Daylight';
+    }else{
+      target.style.backgroundColor = 'white';
+      target.style.color = 'black';
+      this.value = 'Night';
+    }
+    "
     />
 
     <div id="grid">
