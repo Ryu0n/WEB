@@ -59,6 +59,34 @@
         }
       }
     </style> -->
+    <script>
+      function NightDayHandler(self) {
+        var target = document.querySelector("body");
+        var links = document.querySelectorAll("a");
+
+        if (self.value == "Night") {
+          target.style.backgroundColor = "black";
+          target.style.color = "white";
+          self.value = "Daylight";
+
+          var i = 0;
+          while (i < links.length) {
+            links[i].style.color = "powderblue";
+            i += 1;
+          }
+        } else {
+          target.style.backgroundColor = "white";
+          target.style.color = "black";
+          self.value = "Night";
+
+          var i = 0;
+          while (i < links.length) {
+            links[i].style.color = "black";
+            i += 1;
+          }
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -80,7 +108,7 @@
     document.querySelector('body').style.color = 'black';"
     /> -->
 
-    <input
+    <!-- <input
       id="night_day"
       type="button"
       value="Night"
@@ -95,24 +123,9 @@
         document.querySelector('#night_day').value = 'Night';
       }
       "
-    />
+    /> -->
 
-    <input
-      type="button"
-      value="Night"
-      onclick="
-      var target = document.querySelector('body');
-    if (this.value == 'Night'){
-      target.style.backgroundColor = 'black';
-      target.style.color = 'white';
-      this.value = 'Daylight';
-    }else{
-      target.style.backgroundColor = 'white';
-      target.style.color = 'black';
-      this.value = 'Night';
-    }
-    "
-    />
+    <input type="button" value="Night" onclick="NightDayHandler(this);" />
 
     <div id="grid">
       <ol>
