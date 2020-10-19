@@ -65,10 +65,55 @@
         }
       }
     </style> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="colors.js"></script>
+    <!-- <script>
+      var Body = {
+        setBackgroundColor: function (target, color) {
+          target.style.backgroundColor = color;
+        },
+        setFontColor: function (target, color) {
+          target.style.color = color;
+        },
+      };
+
+      var Links = {
+        setLinksColor: function (color) {
+          var links = document.querySelectorAll("a");
+          var i = 0;
+          while (i < links.length) {
+            links[i].style.color = color;
+            i += 1;
+          }
+        },
+      };
+
+      function NightDayHandler(self) {
+        var target = document.querySelector("body");
+
+        if (self.value == "Night") {
+          Body.setBackgroundColor(target, "black");
+          Body.setFontColor(target, "white");
+
+          self.value = "Daylight";
+
+          Links.setLinksColor("powderblue");
+        } else {
+          Body.setBackgroundColor(target, "white");
+          Body.setFontColor(target, "black");
+
+          self.value = "Night";
+
+          Links.setLinksColor("blue");
+        }
+      }
+    </script> -->
   </head>
 
   <body>
     <h1><a href="index.html">WEB</a></h1>
+
+    <input type="button" value="Night" onclick="NightDayHandler(this);" />
 
     <div id="grid">
       <ol>

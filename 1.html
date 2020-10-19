@@ -59,34 +59,72 @@
         }
       }
     </style> -->
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="colors.js"></script>
+    <!-- <script>
+      var Body = {
+        setBackgroundColor: function (target, color) {
+          target.style.backgroundColor = color;
+        },
+        setFontColor: function (target, color) {
+          target.style.color = color;
+        },
+      };
+
+      // function setBackgroundColor(target, color) {
+      //   target.style.backgroundColor = color;
+      // }
+
+      // function setFontColor(target, color) {
+      //   target.style.color = color;
+      // }
+
+      var Links = {
+        setLinksColor: function (color) {
+          var links = document.querySelectorAll("a");
+          var i = 0;
+          while (i < links.length) {
+            links[i].style.color = color;
+            i += 1;
+          }
+        },
+      };
+
+      // function setLinksColor(color) {
+      //   var links = document.querySelectorAll("a");
+      //   var i = 0;
+      //   while (i < links.length) {
+      //     links[i].style.color = color;
+      //     i += 1;
+      //   }
+      // }
+
       function NightDayHandler(self) {
         var target = document.querySelector("body");
-        var links = document.querySelectorAll("a");
 
         if (self.value == "Night") {
-          target.style.backgroundColor = "black";
-          target.style.color = "white";
+          Body.setBackgroundColor(target, "black");
+          Body.setFontColor(target, "white");
+          // setBackgroundColor(target, "black");
+          // setFontColor(target, "white");
+
           self.value = "Daylight";
 
-          var i = 0;
-          while (i < links.length) {
-            links[i].style.color = "powderblue";
-            i += 1;
-          }
+          Links.setLinksColor("powderblue");
+          // setLinksColor("powderblue");
         } else {
-          target.style.backgroundColor = "white";
-          target.style.color = "black";
+          Body.setBackgroundColor(target, "white");
+          Body.setFontColor(target, "black");
+          // setBackgroundColor(target, "white");
+          // setFontColor(target, "black");
+
           self.value = "Night";
 
-          var i = 0;
-          while (i < links.length) {
-            links[i].style.color = "black";
-            i += 1;
-          }
+          Links.setLinksColor("blue");
+          // setLinksColor("blue");
         }
       }
-    </script>
+    </script> -->
   </head>
 
   <body>
