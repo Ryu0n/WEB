@@ -153,8 +153,8 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
   예를 들어보자..
 
   ```
-    fs.readFile(path[, options], callback)
-    fs.readFileSync(path[, options])
+  fs.readFile(path[, options], callback)
+  fs.readFileSync(path[, options])
   ```
 
 - Callback  
@@ -170,7 +170,6 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
   }
 
   slowfunc(a);
-
   ```
 
 - CRUD (Create, Read, Update, Delete)
