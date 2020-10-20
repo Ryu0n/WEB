@@ -58,22 +58,22 @@ Grid 기술은 레이아웃을 편리하게 디자인하기 위한 기술이다.
 Grid 기술을 사용하면 페이지 영역 분할이 용이해진다. 가령 3x3이라던가..  
 Grid 기술을 사용하기 위해서는 배치할 요소들의 부모 태그가 필요하다.  
  #grid {  
-border: 3px solid pink;  
-display: grid;  
-grid-template-columns: 1fr 1fr; /_ 가로로 1:1 비율 유지 _/  
-}
+ border: 3px solid pink;  
+ display: grid;  
+ grid-template-columns: 1fr 1fr; /_ 가로로 1:1 비율 유지 _/  
+ }
 
 ### MediaQuery
 
 웹 페이지를 출력하는 화면의 크기에 따라 웹 페이지 자체의 사이즈도 동적으로 반응해야할 경우가 생긴다. (반응형 웹 디자인) 이를 위해 사용하는 기술이다.  
 아래의 코드는 최대 너비가 800일때까지는 표시하지 말라는 의미이다.  
 작동하려면 @media 키워드를 사용하고 괄호 안에는 조건을 달아주어야 한다.  
-/_ media query : 반응형 웹 디자인 _/  
-@media (max-width: 800px) {  
-div {  
-display: none;  
-}  
-}
+ /_ media query : 반응형 웹 디자인 _/  
+ @media (max-width: 800px) {  
+ div {  
+ display: none;  
+ }  
+ }
 
 ## WEB - JavaScript
 
