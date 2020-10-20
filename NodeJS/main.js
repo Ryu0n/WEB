@@ -9,9 +9,9 @@ function templateHTML(title, list, description) {
     <head>
       <title>WEBn - ${title}</title>
       <meta charset="utf-8" />
-      <link rel="stylesheet" href="style.css" />
+      <!-- <link rel="stylesheet" href="../HTML&CSS&JS/style.css" /> -->
+      <!-- <script src="../HTML&CSS&JS/colors.js"></script> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="../HTML&CSS&JS/colors.js"></script>
     </head>
   
     <body>
@@ -21,6 +21,7 @@ function templateHTML(title, list, description) {
   
       <div id="grid">
         ${list}
+        <a href="/create">create</a>
         <div id="contents">
           <h2>
             <a href="https://namu.wiki/w/${title}" target="_blank">${title}</a
@@ -46,20 +47,6 @@ function getFileList(files) {
   return list;
 }
 
-function setDefault(title, description) {
-  var info = {};
-
-  info.title = title;
-  info.description = description;
-
-  if (title == undefined) {
-    info.title = "Welcome";
-    info.description = "Hello, Node.js";
-  }
-
-  return info;
-}
-
 var app = http.createServer(function (request, response) {
   var _url = request.url;
   var parsedData = url.parse(_url, true);
@@ -70,14 +57,47 @@ var app = http.createServer(function (request, response) {
   if (pathname == "/") {
     fs.readdir("./data/", (err, files) => {
       var list = getFileList(files);
+      var description = "Hello, Node.js";
+      var template = null;
 
-      fs.readFile(`data/${title}`, "utf8", (err, description) => {
-        var info = setDefault(title, description);
-        var template = templateHTML(info.title, list, info.description);
+      if (title == undefined) {
+        title = "Welcome";
+        template = templateHTML(title, list, description);
+      } else {
+        description = fs.readFileSync(`data/${title}`, "utf8");
+        template = templateHTML(title, list, description);
+      }
 
+      if (template != null) {
         response.writeHead(200); // Success
         response.end(template);
-      });
+      }
+    });
+  } else if (pathname == "/create") {
+    fs.readdir("./data/", (err, files) => {
+      var list = getFileList(files);
+      var description = `
+      <form action="http://localhost:3000/process_create" method="POST" placeholder="title">
+      <p><input type="text" name="title" /></p>
+      <p>
+        <textarea name="description" placeholder="description"></textarea>
+      </p>
+      <p>
+        <input type="submit" />
+      </p>
+    </form>
+      `;
+      var template = null;
+
+      if (title == undefined) {
+        title = "CREATE";
+        template = templateHTML(title, list, description);
+      }
+
+      if (template != null) {
+        response.writeHead(200); // Success
+        response.end(template);
+      }
     });
   } else {
     response.writeHead(404); // Not found
