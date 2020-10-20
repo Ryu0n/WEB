@@ -112,17 +112,17 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 - URL  
   URL의 형식에 대해 알아보자.  
    'http://opentutorials.org:3000/main?id=HTML&page=12'  
-  http : hyper text transfer protocol, 사용자가 서버에 접속할 때의 방식. 웹 브라우저와 웹 서버가 데이터를 주고 받기 위한 프로토콜  
-  opentutorials.org : host(domain)  
-  3000 : 3000번 포트와 연결되어 있는 서버와 통신. 3000번 포트에 nodejs 서버를 실행시킨 것. 단, 80번 포트를 통해서 실행시킨 경우 접속할 때에는 80번이 생략 가능하다. 전세계적으로 80번을 쓰기 때문.  
-  main : path  
-  ?id=HTML&page=12 : _query string_, 요청할 때 전달할 정보. ?로 시작하는 것으로 약속되어 있다.
+  **http** : hyper text transfer protocol, 사용자가 서버에 접속할 때의 방식. 웹 브라우저와 웹 서버가 데이터를 주고 받기 위한 프로토콜  
+  **opentutorials.org** : host(domain)  
+  **3000** : 3000번 포트와 연결되어 있는 서버와 통신. 3000번 포트에 nodejs 서버를 실행시킨 것. 단, 80번 포트를 통해서 실행시킨 경우 접속할 때에는 80번이 생략 가능하다. 전세계적으로 80번을 쓰기 때문.  
+  **main** : path  
+  **?id=HTML&page=12** : _query string_, 요청할 때 전달할 정보. ?로 시작하는 것으로 약속되어 있다.
 
 - Query String  
   Query String을 통해 동적인 웹 페이지를 제공할 수 있다. (틀이 같다는 전재에서) 똑같은 템플릿에 데이터만 다른 경우 어떡해야 하는가? 에 대한 문제를 해결할 수 있는 것이다.
 
-  var queryData = url.parse(\_url, true).query;
-  var title = queryData.id;
+      var queryData = url.parse(\_url, true).query;
+      var title = queryData.id;
 
   queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 있다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
 
