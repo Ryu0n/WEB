@@ -147,7 +147,7 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 
   fs.readdir(path, callback) 메소드를 통해 해당 디렉터리의 파일목록들을 읽어들일 수 있다.
 
-- Synchronous & Asynchronous
+- Synchronous & Asynchronous  
   Synchronous는 동기, Asynchronous는 비동기라는 의미이다. 동기는 하나의 작업이 끝날 때까지 다음 작업을 실행하지 않는다. 반대로 비동기는 하나의 작업이 끝나지 않더라도 다른 작업을 수행함을 의미한다 (병렬적).  
   Node.js는 **비동기 (Aynchronous)**를 위한 기능들이 포함되어 있다.  
   예를 들어보자..
@@ -157,7 +157,7 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
     fs.readFileSync(path[, options])
   ```
 
-- Callback
+- Callback  
   함수를 인자로써 넘길 수 있다. 그리고 특정작업이 끝나면 인자로 넘겨준 콜백메소드를 호출하여 해당 작업을 수행하는 것을 의미한다.
 
   ```
