@@ -24,21 +24,29 @@
 
 - id  
   id는 고유하다는 특징이 있다.  
-  css에서 참조하는 방법 :  
-  #grid {  
-  display: grid;  
-  grid-template-columns: 150px 1fr;  
+  css에서 참조하는 방법 :
+
+  ```
+  #grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
   }
+  ```
+
 - class  
    class 속성에 띄어쓰기를 쓸때마다 자식으로 구분한다.  
    saw active 는 saw의 자식은 active를 의미..  
-  css에서 참조하는 방법 :  
-  .saw {  
-  color: gray;  
+   css에서 참조하는 방법 :
+
+  ```
+  .saw {
+      color: gray;
   }
-  .active {  
-  color: red;  
+
+  .active {
+      color: red;
   }
+  ```
 
 ### Inline & Block
 
@@ -56,12 +64,15 @@
 
 Grid 기술은 레이아웃을 편리하게 디자인하기 위한 기술이다.  
 Grid 기술을 사용하면 페이지 영역 분할이 용이해진다. 가령 3x3이라던가..  
-Grid 기술을 사용하기 위해서는 배치할 요소들의 부모 태그가 필요하다.  
- #grid {  
- border: 3px solid pink;  
- display: grid;  
- grid-template-columns: 1fr 1fr; /_ 가로로 1:1 비율 유지 _/  
+Grid 기술을 사용하기 위해서는 배치할 요소들의 부모 태그가 필요하다.
+
+```
+ #grid {
+    border: 3px solid pink;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /_ 가로로 1:1 비율 유지 _/
  }
+```
 
 ### MediaQuery
 
@@ -124,10 +135,12 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 - Query String  
   Query String을 통해 동적인 웹 페이지를 제공할 수 있다. (틀이 같다는 전재에서) 똑같은 템플릿에 데이터만 다른 경우 어떡해야 하는가? 에 대한 문제를 해결할 수 있는 것이다.
 
-      var queryData = url.parse(\_url, true).query;
-      var title = queryData.id;
+```
+    var queryData = url.parse(\_url, true).query;
+    var title = queryData.id;
+```
 
-  queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 있다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
+queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 있다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
 
 - fs (File System)  
   fs.fileRead(path, options, callback) 메소드를 통해 주어진 Query String에 따라 알맞는 파일(웹 페이지)을 로드할 수 있다. 물론 서버단의 스크립트가 수정되면 nodejs를 재구동해야 하지만, 각 웹 페이지의 수정사항을 반영할 때에는 파일을 읽어들이는 구조이기 때문에 nodejs를 재구동할 필요가 없다.
