@@ -111,9 +111,8 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 
 - URL  
   URL의 형식에 대해 알아보자.  
-   'http://opentutorials.org:3000/main?id=HTML&page=12'
-  http : hyper text transfer protocol, 사용자가 서버에 접속할 때의 방식.  
-   웹 브라우저와 웹 서버가 데이터를 주고 받기 위한 프로토콜  
+   'http://opentutorials.org:3000/main?id=HTML&page=12'  
+  http : hyper text transfer protocol, 사용자가 서버에 접속할 때의 방식. 웹 브라우저와 웹 서버가 데이터를 주고 받기 위한 프로토콜  
   opentutorials.org : host(domain)  
   3000 : 3000번 포트와 연결되어 있는 서버와 통신. 3000번 포트에 nodejs 서버를 실행시킨 것. 단, 80번 포트를 통해서 실행시킨 경우 접속할 때에는 80번이 생략 가능하다. 전세계적으로 80번을 쓰기 때문.  
   main : path  
