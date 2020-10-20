@@ -125,4 +125,11 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 var queryData = url.parse(\_url, true).query;
 var title = queryData.id;
 
-queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 잇다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
+queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 있다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
+
+- fs (File System)
+  fs.fileRead(path, options, callback) 메소드를 통해 주어진 Query String에 따라 알맞는 파일(웹 페이지)을 로드할 수 있다. 물론 서버단의 스크립트가 수정되면 nodejs를 재구동해야 하지만, 각 웹 페이지의 수정사항을 반영할 때에는 파일을 읽어들이는 구조이기 때문에 nodejs를 재구동할 필요가 없다.
+
+  fs.readdir(path, callback) 메소드를 통해 해당 디렉터리의 파일목록들을 읽어들일 수 있다.
+
+- CRUD (Create, Read, Update, Delete)
