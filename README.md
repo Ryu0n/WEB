@@ -172,4 +172,66 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
   slowfunc(a);
   ```
 
+- NPM (Node Package Manager)
+  Nodsjs에서 NPM을 통해 패키지(일종의 모듈)을 설치 및 관리할 수 있다.  
+  pm2를 통해 우리가 Nodejs를 통해 만든 프로그램을 패키지화 시켜 관리할 수 있다.
+
+  ```
+  // pm2 패키지 설치
+  npm install pm2 -g
+
+  // pm2 패키지를 통해 우리가 만든 프로그램을 실행
+  pm2 start main.js
+
+  // pm2 패키지를 통해 실행되고 있는 프로그램을 모니터링
+  pm2 monit
+
+  // pm2 패키지를 통해 실행되고 있는 프로그램 리스트 출력
+  pm2 list
+
+  // pm2 패키지를 통해 실행되고 있는 프로그램을 stop
+  pm2 stop main.js
+
+  // --watch 옵션을 붙이게 되면 변경사항이 생기더라도 재구동을 할 필요가 없음.
+  pm2 start main.js --watch
+
+  // 문제점이 발생하면 로그를 출력하여 오류를 발견 가능.
+  pm2 log
+  ```
+
+- HTML Form  
+   사용자가 서버쪽으로 데이터를 전송하기 위한 방식.  
+   HTML 문서에서 form 태그를 사용하면 된다. form 태그의 속성으로 action이 사용되는데 이는 어디로 입력받은 데이터를 전송할 것인지를 의미한다. 그리고 어떤 데이터를 전송할 것인지를 알아야 하므로 name속성을 사용해야 한다.
+
+  ```
+  <form action="http://localhost:3000/process_create">
+    <p><input type="text" name="title" /></p>
+    <p>
+        <textarea name="description"></textarea>
+    </p>
+    <p>
+        <input type="submit" />
+    </p>
+  </form>
+  ```
+
+  http://localhost:3000/process_create?title=111&description=222  
+  title과 description에 입력한 값으로 쿼리스트링이 만들어지는 것을 확인할 수 있다.
+
+  그러나 이 방법은 좋은 방법이 아니다. URL에 데이터가 포함되어 있기 때문에 누군가가 이를 악용할 수 있기 때문이다. (GET 방식)
+
+- GET 방식 & POST 방식  
+  출처 : https://hongsii.github.io/2017/08/02/what-is-the-difference-get-and-post/  
+   *GET 방식*은 **서버로부터 정보를 조회**하기 위해 설계된 메소드입니다. GET은 요청을 전송할 때 필요한 데이터를 Body에 담지 않고, **쿼리스트링**을 통해 전송합니다. 쿼리스트링을 사용하게 되면 URL에 **조회 조건**을 표시하기 때문에 특정 페이지를 **링크하거나 북마크**할 수 있습니다.
+
+  쿼리스트링을 포함한 URL의 샘플은 아래와 같습니다. 여기서 요청 파라미터명은 name1, name2이고, 각각의 파라미터는 value1, value2라는 값으로 서버에 요청을 보내게 됩니다.
+
+  www.example-url.com/resources?name1=value1&name2=value2
+
+  그리고 GET은 불필요한 요청을 제한하기 위해 요청이 캐시될 수 있습니다. js, css, 이미지 같은 정적 컨텐츠는 데이터양이 크고, 변경될 일이 적어서 반복해서 동일한 요청을 보낼 필요가 없습니다. **정적 컨텐츠를 요청**하고 나면 브라우저에서는 **요청을 캐시**해두고, 동일한 요청이 발생할 때 서버로 요청을 보내지 않고 캐시된 데이터를 사용합니다. 그래서 프론트엔드 개발을 하다보면 **정적 컨텐츠가 캐시돼 컨텐츠를 변경해도 내용이 바뀌지 않는 경우**가 종종 발생합니다. 이 때는 브라우저의 캐시를 지워주면 다시 컨텐츠를 조회하기 위해 서버로 요청을 보내게 됩니다.
+
+  *POST 방식*은 **리소스를 생성/변경**하기 위해 설계되었기 때문에 GET과 달리 전송해야될 데이터를 **HTTP 메세지의 Body에 담아서** 전송합니다. HTTP 메세지의 Body는 **길이의 제한없이** 데이터를 전송할 수 있습니다. 그래서 POST 요청은 GET과 달리 **대용량 데이터**를 전송할 수 있습니다. 이처럼 POST는 데이터가 Body로 전송되고 내용이 눈에 보이지 않아 GET보다 보안적인 면에서 안전하다고 생각할 수 있지만, POST 요청도 크롬 개발자 도구, Fiddler와 같은 툴로 요청 내용을 확인할 수 있기 때문에 민감한 데이터의 경우에는 반드시 **암호화**해 전송해야 합니다.
+
+  그리고 POST로 요청을 보낼 때는 요청 **헤더의 Content-Type에 요청 데이터의 타입을 표시**해야 합니다. 데이터 타입을 표시하지 않으면 서버는 내용이나 URL에 포함된 리소스의 확장자명 등으로 데이터 타입을 유추합니다. 만약, 알 수 없는 경우에는 application/octet-stream로 요청을 처리합니다.
+
 - CRUD (Create, Read, Update, Delete)
