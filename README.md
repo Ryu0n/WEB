@@ -109,7 +109,7 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 - 템플릿 리터럴 (JavaScript)  
   템플릿 리터럴은 `기호를 사용하면 된다. 템플릿 리터럴을 사용하면 변수를 \${}로 대체할 수 있으며 개행문자와 같은 특수기호를 따로 사용하지 않아도 된다.
 
-- URL
+- URL  
   URL의 형식에 대해 알아보자.  
    'http://opentutorials.org:3000/main?id=HTML&page=12'
   http : hyper text transfer protocol, 사용자가 서버에 접속할 때의 방식.  
@@ -119,7 +119,7 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
   main : path  
   ?id=HTML&page=12 : _query string_, 요청할 때 전달할 정보. ?로 시작하는 것으로 약속되어 있다.
 
-- Query String
+- Query String  
   Query String을 통해 동적인 웹 페이지를 제공할 수 있다. (틀이 같다는 전재에서) 똑같은 템플릿에 데이터만 다른 경우 어떡해야 하는가? 에 대한 문제를 해결할 수 있는 것이다.
 
 var queryData = url.parse(\_url, true).query;
@@ -127,7 +127,7 @@ var title = queryData.id;
 
 queryData에는 특정 객체가 생성된다. 이 객체는 URL의 /? 뒤에 오는 정보들을 담고 있다. 그래서, id에 대한 정보를 담고 있다면 위의 title 변수처럼 객체안의 정보를 참조하여 템플릿 리터럴을 사용해 동적인 웹 페이지를 제공할 수 있게 된다.
 
-- fs (File System)
+- fs (File System)  
   fs.fileRead(path, options, callback) 메소드를 통해 주어진 Query String에 따라 알맞는 파일(웹 페이지)을 로드할 수 있다. 물론 서버단의 스크립트가 수정되면 nodejs를 재구동해야 하지만, 각 웹 페이지의 수정사항을 반영할 때에는 파일을 읽어들이는 구조이기 때문에 nodejs를 재구동할 필요가 없다.
 
   fs.readdir(path, callback) 메소드를 통해 해당 디렉터리의 파일목록들을 읽어들일 수 있다.
