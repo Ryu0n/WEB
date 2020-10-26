@@ -249,3 +249,207 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
   그리고 POST로 요청을 보낼 때는 요청 **헤더의 Content-Type에 요청 데이터의 타입을 표시**해야 합니다. 데이터 타입을 표시하지 않으면 서버는 내용이나 URL에 포함된 리소스의 확장자명 등으로 데이터 타입을 유추합니다. 만약, 알 수 없는 경우에는 application/octet-stream로 요청을 처리합니다.
 
 - CRUD (Create, Read, Update, Delete)
+
+### 2020-10-26
+
+- POST 방식으로 전송한 데이터를 수신하는 방법
+
+```
+if (pathname == "/create_process") {
+    var body = "";
+
+    /* data 이벤트 */
+    // web 브라우저가 post방식으로 데이터를 전송할 때 데이터가 많으면 무리가 갈 수 있다.
+    // node.js에서는 post 방식으로 전송된 데이터가 많을 때를 대비해서..
+    request.on("data", function (data) {
+      // 데이터를 조각내서 수신할 때마다 추가
+      body = body + data;
+
+      // 한번에 너무 많은 양이 들어오면 접속을 끊는다.
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+
+    /* end 이벤트 */
+    // 정보 수신이 끝난 시점.
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var title = post.title;
+      var description = post.description;
+    });
+
+    response.writeHead(200);
+    response.end("success");
+  }
+```
+
+- CREATE 기능 구현하기
+
+```
+    /* end 이벤트 */
+    // 정보 수신이 끝난 시점.
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var title = post.title;
+      var description = post.description;
+
+      // 아래의 콜백함수는 에러를 처리하는 부분을 위해 제공됨.
+      // 콜백함수가 호출되는 시점 : 파일의 저장이 끝날을 때
+      fs.writeFile(`data/${title}`, description, "utf8", function (err) {
+        response.writeHead(200);
+        response.end("success");
+      });
+    }
+```
+
+그러나.. 생성된 파일을 볼 수 있는 *뷰 페이지*가 필요하다!
+
+리다이렉션이 필요하다.  
+리다이렉션 : 사용자를 다른 페이지로 보내는 것.
+
+```
+    /* end 이벤트 */
+    // 정보 수신이 끝난 시점.
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var title = post.title;
+      var description = post.description;
+
+      // 아래의 콜백함수는 에러를 처리하는 부분을 위해 제공됨.
+      // 콜백함수가 호출되는 시점 : 파일의 저장이 끝날을 때
+      fs.writeFile(`data/${title}`, description, "utf8", function (err) {
+        response.writeHead(302, { Location: `/?id=${title}` }); // 302 : redirection
+        response.end();
+      });
+    }
+```
+
+우리는 여태까지 CREATE 연산을 구현한 것이다. 앞으로 UPDATE도 구현할 것이다..
+
+- UPDATE 기능 구현하기
+
+필요한 것
+
+1. Form
+2. Read 기능 - form의 수정할 데이터를 읽기 위한..
+
+```
+if (pathname == "/update") {
+    fs.readdir("./data/", (err, files) => {
+      var list = getFileList(files);
+      var description = fs.readFileSync(`data/${title}`, "utf8");
+      var control = `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`;
+      var form = `
+      <form action="http://localhost:3000/update_process" method="POST" placeholder="title">
+      <input type="hidden" name="id" value="${title}">
+      <p><input type="text" name="title" value="${title}"/></p>
+      <p>
+        <textarea name="description" placeholder="description">
+        ${description}</textarea>
+      </p>
+      <p>
+        <input type="submit" value="UPDATE"/>
+      </p>
+    </form>
+      `;
+      var template = templateHTML(title, list, form, control);
+
+      response.writeHead(200); // Success
+      response.end(template);
+    });
+  }
+```
+
+input hidden 타입은 특정 파일을 수정할 때, 이름을 수정한 경우 수정된 이름의 파일을 찾을 수 없을 것이다. 그래서 기존의 파일명을 유지하기 위해 존재한다.
+
+```
+if (pathname == "/update_process") {
+    var body = "";
+
+    request.on("data", function (data) {
+      body = body + data;
+
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var id = post.id;
+      var title = post.title;
+      var description = post.description;
+
+      // 파일의 이름 변경
+      fs.rename(`data/${id}`, `data/${title}`, function (error) {
+        // 파일의 내용 변경
+        fs.writeFile(`data/${title}`, description, "utf8", function (err) {
+          response.writeHead(302, { Location: `/?id=${title}` });
+          response.end();
+        });
+      });
+    });
+  }
+```
+
+- DELETE 기능 구현하기  
+  DELETE 버튼을 눌렀을 때는 특정 페이지로 이동하게끔 링크를 걸어두면 위험하다. 그 이유는 해당 링크를 접근하면 (특히 GET 방식은 요청 URL에 쿼리 스트링이 들어가 있으므로 정보 노출이 더 심하다.) 누구나 데이터를 삭제할 수 있기 때문이다. 그래서 삭제기능은 **form**으로 구현하는게 맞다.
+
+```
+if (pathname == "/") {
+    fs.readdir("./data/", (err, files) => {
+      var list = getFileList(files);
+      var description = "Hello, Node.js";
+      var template = null;
+      var control = null;
+
+      if (title == undefined) {
+        title = "Welcome";
+        control = "";
+      } else {
+        description = fs.readFileSync(`data/${title}`, "utf8");
+        control = `
+        <a href="/create">CREATE</a>
+        <a href="/update?id=${title}">UPDATE</a>
+        <form action="delete_process" method="post">
+          <input type="hidden" name="id" value="${title}">
+          <input type="submit" value="delete">
+        </form>`;
+      }
+
+      template = templateHTML(title, list, description, control);
+
+      if (template != null) {
+        response.writeHead(200); // Success
+        response.end(template);
+      }
+    });
+  }
+```
+
+```
+if (pathname == "/delete_process") {
+    var body = "";
+
+    request.on("data", function (data) {
+      body = body + data;
+
+      if (body.length > 1e6) {
+        request.connection.destroy();
+      }
+    });
+
+    request.on("end", function () {
+      var post = qs.parse(body);
+      var id = post.id;
+
+      fs.unlink(`data/${id}`, function (error) {
+        response.writeHead(302, { Location: `/` }); // 302 : redirection
+        response.end();
+      });
+    });
+  }
+```
+
+파일을 삭제할 때는 fs객체의 unlink() 메소드를 사용하면 된다. 그리고 삭제한 이후에는 최초의 경로로 리다이렉트를 해줄 필요가 있다.
