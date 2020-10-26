@@ -248,11 +248,11 @@ Node.js는 웹 서버로써의 기능을 수행할 것이다.
 
   그리고 POST로 요청을 보낼 때는 요청 **헤더의 Content-Type에 요청 데이터의 타입을 표시**해야 합니다. 데이터 타입을 표시하지 않으면 서버는 내용이나 URL에 포함된 리소스의 확장자명 등으로 데이터 타입을 유추합니다. 만약, 알 수 없는 경우에는 application/octet-stream로 요청을 처리합니다.
 
-- CRUD (Create, Read, Update, Delete)
-
 ### 2020-10-26
 
-- POST 방식으로 전송한 데이터를 수신하는 방법
+**CRUD (Create, Read, Update, Delete)**
+
+- READ 기능 구현하기
 
 ```
 if (pathname == "/create_process") {
@@ -305,7 +305,7 @@ if (pathname == "/create_process") {
 
 그러나.. 생성된 파일을 볼 수 있는 *뷰 페이지*가 필요하다!
 
-리다이렉션이 필요하다.  
+**리다이렉션**이 필요하다.  
 리다이렉션 : 사용자를 다른 페이지로 보내는 것.
 
 ```
