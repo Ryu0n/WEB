@@ -520,7 +520,7 @@ if (pathname == "/delete_process") {
   }
   ```
 
-  http://localhost:3000/?id=../password.js 를 url로 입력하고 title\_ 변수를 출력해보았다.
+  http://localhost:3000/?id=../password.js 를 url로 입력하고 \_title 변수를 출력해보았다.
 
   ```
   // pm2 log 결과
