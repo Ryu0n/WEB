@@ -486,7 +486,8 @@ if (pathname == "/delete_process") {
   path 모듈의 parse() 메소드를 사용하면 경로를 파싱한 정보를 담고있는 객체를 얻을 수 있다.
 
   ```
-  const { Console } = require('console');
+  // lib/pathparse.js
+
   var path = require('path');
 
   parsing = path.parse('../password.js');
@@ -513,7 +514,6 @@ if (pathname == "/delete_process") {
   ```
   // 기존의 title 변수명을 title_로 바꾸었다.
   var title_ = queryData.id;
-
   var title = title_;
   if (title_ != undefined) {
     title = path.parse(title_).base;
