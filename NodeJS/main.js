@@ -2,17 +2,22 @@ var http = require("http");
 var url = require("url");
 var fs = require("fs");
 var qs = require("querystring");
-
+var path = require('path');
 var template = require('./lib/template')
 
-
-
 var app = http.createServer(function (request, response) {
+
   var _url = request.url;
   var parsedData = url.parse(_url, true);
   var queryData = parsedData.query;
   var pathname = parsedData.pathname;
-  var title = queryData.id;
+  var title_ = queryData.id;
+  var title = title_;
+  if (title_ != undefined) {
+    title = path.parse(title_).base;
+  }
+
+  console.log(title_);
 
   if (pathname == "/") {
     fs.readdir("./data/", (err, files) => {
@@ -42,7 +47,9 @@ var app = http.createServer(function (request, response) {
         response.end(HTML);
       }
     });
-  } else if (pathname == "/create") {
+  } 
+  
+  else if (pathname == "/create") {
     fs.readdir("./data/", (err, files) => {
       title = "CREATE";
       var list = template.List(files);
@@ -85,7 +92,9 @@ var app = http.createServer(function (request, response) {
         response.end();
       });
     });
-  } else if (pathname == "/update") {
+  } 
+  
+  else if (pathname == "/update") {
     fs.readdir("./data/", (err, files) => {
       var list = template.List(files);
       var description = fs.readFileSync(`data/${title}`, "utf8");
@@ -132,7 +141,9 @@ var app = http.createServer(function (request, response) {
         });
       });
     });
-  } else if (pathname == "/delete_process") {
+  } 
+  
+  else if (pathname == "/delete_process") {
     var body = "";
 
     request.on("data", function (data) {
@@ -152,7 +163,9 @@ var app = http.createServer(function (request, response) {
         response.end();
       });
     });
-  } else {
+  } 
+  
+  else {
     response.writeHead(404); // Not found
     response.end("Not found");
   }

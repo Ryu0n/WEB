@@ -509,3 +509,37 @@ if (pathname == "/delete_process") {
   ```
 
   이를 사용하여 base 부분만 뽑아내면 입력정보에 대한 보안을 만족시킬 수 있다.
+
+  ```
+  // 기존의 title 변수명을 title_로 바꾸었다.
+  var title_ = queryData.id;
+
+  var title = title_;
+  if (title_ != undefined) {
+    title = path.parse(title_).base;
+  }
+  ```
+
+  http://localhost:3000/?id=../password.js 를 url로 입력하고 title\_ 변수를 출력해보았다.
+
+  ```
+  // pm2 log 결과
+  0|main   | ../password.js
+  ```
+
+  그러나 오류가 발생했다.
+
+  ```
+  0|main   | Error: ENOENT: no such file or directory, open 'data/password.js'
+  0|main   |     at Object.openSync (fs.js:462:3)
+  0|main   |     at Object.readFileSync (fs.js:364:35)
+  0|main   |     at D:\02. Development\WEB\NodeJS\main.js:33:26
+  0|main   |     at FSReqCallback.oncomplete (fs.js:156:23) {
+  0|main   |   errno: -4058,
+  0|main   |   syscall: 'open',
+  0|main   |   code: 'ENOENT',
+  0|main   |   path: 'data/password.js'
+  0|main   | }
+  ```
+
+  ../password.js 부분의 base부분(password.js)만 필터링하여 나머지 경로는 제거한 상태로 요청 url을 쏘기 때문에 data/password.js 요청이 찍히는 것이다. (data/../password.js로 찍히지 않고..)
