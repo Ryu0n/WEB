@@ -513,10 +513,10 @@ if (pathname == "/delete_process") {
 
   ```
   // 기존의 title 변수명을 title_로 바꾸었다.
-  var title_ = queryData.id;
-  var title = title_;
-  if (title_ != undefined) {
-    title = path.parse(title_).base;
+  var _title = queryData.id;
+  var title = _title;
+  if (_title != undefined) {
+    title = path.parse(_title).base;
   }
   ```
 

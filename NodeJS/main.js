@@ -11,13 +11,13 @@ var app = http.createServer(function (request, response) {
   var parsedData = url.parse(_url, true);
   var queryData = parsedData.query;
   var pathname = parsedData.pathname;
-  var title_ = queryData.id;
-  var title = title_;
-  if (title_ != undefined) {
-    title = path.parse(title_).base;
+  var _title = queryData.id;
+  var title = _title;
+  if (_title != undefined) {
+    title = path.parse(_title).base;
   }
 
-  console.log(title_);
+  console.log(_title);
 
   if (pathname == "/") {
     fs.readdir("./data/", (err, files) => {
