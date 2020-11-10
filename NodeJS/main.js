@@ -3,50 +3,9 @@ var url = require("url");
 var fs = require("fs");
 var qs = require("querystring");
 
-function templateHTML(title, list, description, control) {
-  return `
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>WEBn - ${title}</title>
-      <meta charset="utf-8" />
-      <!-- <link rel="stylesheet" href="../HTML&CSS&JS/style.css" /> -->
-      <!-- <script src="../HTML&CSS&JS/colors.js"></script> -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </head>
-  
-    <body>
-      <h1><a href="/">WEB</a></h1>
-  
-      <input type="button" value="Night" onclick="NightDayHandler(this);" />
-  
-      <div id="grid">
-        ${list}
-        ${control}
-        <div id="contents">
-          <h2>
-            <a href="https://namu.wiki/w/${title}" target="_blank">${title}</a
-            >
-          </h2>
-          <p>
-            ${description}
-          </p>
-        </div>
-      </div>
-    </body>
-  </html>  
-  `;
-}
+var template = require('./lib/template')
 
-function getFileList(files) {
-  var list = "<ul>";
-  files.forEach((value, index, array) => {
-    list += `<li><a href="/?id=${value}">${value}</a></li>`;
-  });
-  list += "</ul>";
 
-  return list;
-}
 
 var app = http.createServer(function (request, response) {
   var _url = request.url;
@@ -57,9 +16,9 @@ var app = http.createServer(function (request, response) {
 
   if (pathname == "/") {
     fs.readdir("./data/", (err, files) => {
-      var list = getFileList(files);
+      var list = template.List(files);
       var description = "Hello, Node.js";
-      var template = null;
+      var HTML = null;
       var control = null;
 
       if (title == undefined) {
@@ -76,17 +35,17 @@ var app = http.createServer(function (request, response) {
         </form>`;
       }
 
-      template = templateHTML(title, list, description, control);
+      HTML = template.HTML(title, list, description, control);
 
-      if (template != null) {
+      if (HTML != null) {
         response.writeHead(200); // Success
-        response.end(template);
+        response.end(HTML);
       }
     });
   } else if (pathname == "/create") {
     fs.readdir("./data/", (err, files) => {
       title = "CREATE";
-      var list = getFileList(files);
+      var list = template.List(files);
       var form = `
       <form action="http://localhost:3000/create_process" method="POST" placeholder="title">
       <p><input type="text" name="title" /></p>
@@ -98,11 +57,11 @@ var app = http.createServer(function (request, response) {
       </p>
     </form>
       `;
-      var template = templateHTML(title, list, form, "");
+      var HTML = template.HTML(title, list, form, "");
 
-      if (template != null) {
+      if (HTML != null) {
         response.writeHead(200); // Success
-        response.end(template);
+        response.end(HTML);
       }
     });
   } else if (pathname == "/create_process") {
@@ -128,7 +87,7 @@ var app = http.createServer(function (request, response) {
     });
   } else if (pathname == "/update") {
     fs.readdir("./data/", (err, files) => {
-      var list = getFileList(files);
+      var list = template.List(files);
       var description = fs.readFileSync(`data/${title}`, "utf8");
       var control = `<a href="/create">CREATE</a>`;
       var form = `
@@ -144,10 +103,10 @@ var app = http.createServer(function (request, response) {
       </p>
     </form>
       `;
-      var template = templateHTML(title, list, form, control);
+      var HTML = template.HTML(title, list, form, control);
 
       response.writeHead(200); // Success
-      response.end(template);
+      response.end(HTML);
     });
   } else if (pathname == "/update_process") {
     var body = "";

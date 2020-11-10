@@ -453,3 +453,59 @@ if (pathname == "/delete_process") {
 ```
 
 파일을 삭제할 때는 fs객체의 unlink() 메소드를 사용하면 된다. 그리고 삭제한 이후에는 최초의 경로로 리다이렉트를 해줄 필요가 있다.
+
+### 2020-11-10
+
+- Module  
+  객체(프로퍼티와 메소드의 집합)들을 **라이브러리**화 시키는 단위이다.  
+  라이브러리화를 위해서는 module.exports 키워드를 사용해야 한다.  
+  라이브러리화된 모듈은 require() 메소드를 통해 불러올 수 있다.
+
+  ```
+  // mo.js
+
+  M = {
+    fields:'value',
+    func:function(){
+      console.log(this.fields);
+      }
+    }
+
+  module.exports = M;
+  ```
+
+  ```
+  // mouse.js
+
+  var M = require('./mo.js')
+  ```
+
+- Security  
+  현재 상태에서는 보안 문제가 있다. 무슨 문제냐? 만약 요청 url에 http://localhost:3000/?id=../password.js라고 입력했다고 가정하자. 쿼리스트링의 id에 ../ 부분을 보면 상위디렉터리에 접근이 가능하다는 점이다. 이는 계속 상위디렉터를 타고가면 우리의 하드 디스크에도 접근이 가능하다는 중대한 문제가 존재한다.
+
+  path 모듈의 parse() 메소드를 사용하면 경로를 파싱한 정보를 담고있는 객체를 얻을 수 있다.
+
+  ```
+  const { Console } = require('console');
+  var path = require('path');
+
+  parsing = path.parse('../password.js');
+
+  console.log(parsing);
+  console.log(parsing.base);
+  ```
+
+  ```
+  // 실행결과
+
+  {
+    root: '',
+    dir: '..',
+    base: 'password.js',
+    ext: '.js',
+    name: 'password'
+  }
+  password.js
+  ```
+
+  이를 사용하여 base 부분만 뽑아내면 입력정보에 대한 보안을 만족시킬 수 있다.
