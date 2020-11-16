@@ -556,7 +556,7 @@ if (pathname == "/delete_process") {
 
 즉, 공격자가 자바스크립트를 심어두면 다른 사용자들도 그 영향을 받게된다. 이것은 매우 심각한 현상이다.
 
-이러한 현상을 방지하기 위해 script 태그 부분의 꺽쇠 부분을 HTML Character Entities들로 대체하는 알고리즘이 필요하다. 가령, <는 "& lt;"로, >는 & gt;말이다..
+이러한 현상을 방지하기 위해 script 태그 부분의 꺽쇠 부분을 HTML Character Entities들로 대체하는 알고리즘이 필요하다. 가령, <는 "& lt;"로, >는 "& gt;"말이다..
 
 ```
 &lt;script&gt;
@@ -564,6 +564,19 @@ location.href='https://www.naver.com/'
 &lt;/script&gt;
 ```
 
+위 코드처럼 꺽쇠를 고쳤을 경우..
+
 ![2020111604](https://user-images.githubusercontent.com/32003817/99251596-f225f280-2850-11eb-9239-15dc84ff1fe4.PNG)
 
 다음 결과처럼 스크립트가 실행되는 것이 아닌 문자로써 스크립트의 내용을 그대로 출력하게 된다.
+이런 오염된 정보를 **소독(Sanitize)**해주는 모듈이 있다. npm을 통하여 sanitize-html을 다운로드하면 된다. 우선 현재 진행중인 애플리케이션 혹은 프로젝트를 npm으로 통해 관리하겠다는 명령어를 써야한다. 이것은 npm init이다. 패키지명은 현재 디렉터리를 기준으로 정해진다.
+
+![2020111605](https://user-images.githubusercontent.com/32003817/99252969-3619f700-2853-11eb-9e10-62b7921ba475.PNG)
+
+다음으로 npm install -S sanitize-html 을 입력하여 해당 모듈을 설치한다. 여기서 -S 옵션은 -g(글로벌 모드)가 아닌 현재 패키지에만 해당 모듈을 설치하겠다는 의미이다. 설치하고나면 node_modules 폴더가 생기는데 이 중 sanitize-html 폴더가 우리가 설치한 모듈이다. 나머지 폴더들은 sanitize-html이 의존하고 있는 모듈 및 소프트웨어들이다. (이러한 의존성 관리는 npm이 해주는 것!)
+
+![2020111606](https://user-images.githubusercontent.com/32003817/99253298-dc65fc80-2853-11eb-8faa-f58843d4d644.PNG)
+
+![2020111607](https://user-images.githubusercontent.com/32003817/99253425-159e6c80-2854-11eb-80eb-0f99e7e9121e.PNG)
+
+그리고 package.json 파일을 확인해보면 dependencies 키를 확인할 수 있는데, 이는 현재 작업중인 프로젝트 및 **애플리케이션이 해당 모듈에 의존**하고 있다는 의미이다. (의존성)

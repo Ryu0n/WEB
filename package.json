@@ -1,0 +1,14 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "- HTML : 웹 페이지의 _구조_(틀)을 정의할 수 있다.\r - CSS : 웹 페이지의 *디자인*을 정의할 수 있다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sanitize-html": "^2.1.2"
+  }
+}
