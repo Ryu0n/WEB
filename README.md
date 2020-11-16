@@ -592,3 +592,5 @@ sanitize-html 참고 링크 : https://www.npmjs.com/package/sanitize-html
 
 HTML 태그들은 깨-끗하게 소독이 된 상태이다. (브라우저 상에도 출력되지 않음.)  
 ![2020111611](https://user-images.githubusercontent.com/32003817/99255145-d32a5f00-2856-11eb-97df-2dd86ddc627b.PNG)
+
+기본적으로 h1과 같은 예민하지 않은 태그들은 내용은 살려준다. 그리고, allowedTag를 통해 허용태그를 설정할 수 도 있다. (위의 참고 링크에서 검색해보자.)
