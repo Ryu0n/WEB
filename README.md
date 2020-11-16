@@ -550,5 +550,20 @@ if (pathname == "/delete_process") {
 
 사용자는 데이터만을 서버에게 요청하여 출력물을 봐야한다. 그러나.. script태그를 사용하면 해당 데이터는 더 이상 데이터가 아닌 하나의 스크립트로 간주하여 실제로 실행된다.
 
-![2020111601](https://user-images.githubusercontent.com/32003817/99250132-893d7b00-284e-11eb-9e39-81849060f2db.PNG)  
-![2020111602](https://user-images.githubusercontent.com/32003817/99250398-ef2a0280-284e-11eb-93b6-e7dfde32dc7c.PNG)
+![2020111603](https://user-images.githubusercontent.com/32003817/99250731-81320b00-284f-11eb-97d9-a1a19276cfc8.PNG)
+
+위의 결과는 www.naver.com으로 튕겨버리는 현상이 발생한다.. 이후 XSS 라는 게시글을 클릭만 해도 네이버로 튕겨버린다.
+
+즉, 공격자가 자바스크립트를 심어두면 다른 사용자들도 그 영향을 받게된다. 이것은 매우 심각한 현상이다.
+
+이러한 현상을 방지하기 위해 script 태그 부분의 꺽쇠 부분을 HTML Character Entities들로 대체하는 알고리즘이 필요하다. 가령, <는 &lt;로, >는 &gt;말이다..
+
+```
+&lt;script&gt;
+location.href='https://www.naver.com/'
+&lt;/script&gt;
+```
+
+![2020111604](https://user-images.githubusercontent.com/32003817/99251596-f225f280-2850-11eb-9239-15dc84ff1fe4.PNG)
+
+다음 결과처럼 스크립트가 실행되는 것이 아닌 문자로써 스크립트의 내용을 그대로 출력하게 된다.
