@@ -550,4 +550,5 @@ if (pathname == "/delete_process") {
 
 사용자는 데이터만을 서버에게 요청하여 출력물을 봐야한다. 그러나.. script태그를 사용하면 해당 데이터는 더 이상 데이터가 아닌 하나의 스크립트로 간주하여 실제로 실행된다.
 
-![2020111601](https://user-images.githubusercontent.com/32003817/99250132-893d7b00-284e-11eb-9e39-81849060f2db.PNG)
+![2020111601](https://user-images.githubusercontent.com/32003817/99250132-893d7b00-284e-11eb-9e39-81849060f2db.PNG)  
+![2020111602](https://user-images.githubusercontent.com/32003817/99250398-ef2a0280-284e-11eb-93b6-e7dfde32dc7c.PNG)
