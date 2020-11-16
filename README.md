@@ -588,8 +588,8 @@ sanitize-html 참고 링크 : https://www.npmjs.com/package/sanitize-html
 
 다음은 sanitizeHtml 객체를 통해 CREATE 영역에서 태그들을 소독한 결과이다.
 
-오염된 HTML 입력
+오염된 HTML 입력  
 ![2020111609](https://user-images.githubusercontent.com/32003817/99255017-9eb6a300-2856-11eb-958a-41c351eeb7c8.PNG)
 
-![2020111610](https://user-images.githubusercontent.com/32003817/99255124-c9086080-2856-11eb-8921-7ae751719e91.PNG)  
+HTML 태그들은 깨-끗하게 소독이 된 상태이다. (브라우저 상에도 출력되지 않음.)
 ![2020111611](https://user-images.githubusercontent.com/32003817/99255145-d32a5f00-2856-11eb-97df-2dd86ddc627b.PNG)
