@@ -556,7 +556,7 @@ if (pathname == "/delete_process") {
 
 즉, 공격자가 자바스크립트를 심어두면 다른 사용자들도 그 영향을 받게된다. 이것은 매우 심각한 현상이다.
 
-이러한 현상을 방지하기 위해 script 태그 부분의 꺽쇠 부분을 HTML Character Entities들로 대체하는 알고리즘이 필요하다. 가령, <는 &lt;로, >는 &gt;말이다..
+이러한 현상을 방지하기 위해 script 태그 부분의 꺽쇠 부분을 HTML Character Entities들로 대체하는 알고리즘이 필요하다. 가령, <는 "& lt;"로, >는 & gt;말이다..
 
 ```
 &lt;script&gt;
