@@ -480,7 +480,7 @@ if (pathname == "/delete_process") {
   var M = require('./mo.js')
   ```
 
-- Security  
+- Security (오염된 정보가 **입력**된 사례)
   현재 상태에서는 보안 문제가 있다. 무슨 문제냐? 만약 요청 url에 http://localhost:3000/?id=../password.js라고 입력했다고 가정하자. 쿼리스트링의 id에 ../ 부분을 보면 상위디렉터리에 접근이 가능하다는 점이다. 이는 계속 상위디렉터를 타고가면 우리의 하드 디스크에도 접근이 가능하다는 중대한 문제가 존재한다.
 
   path 모듈의 parse() 메소드를 사용하면 경로를 파싱한 정보를 담고있는 객체를 얻을 수 있다.
@@ -543,3 +543,11 @@ if (pathname == "/delete_process") {
   ```
 
   ../password.js 부분의 base부분(password.js)만 필터링하여 나머지 경로는 제거한 상태로 요청 url을 쏘기 때문에 data/password.js 요청이 찍히는 것이다. (data/../password.js로 찍히지 않고..)
+
+### 2020-11-16
+
+- Security (오염된 정보가 **출력**된 사례)
+
+사용자는 데이터만을 서버에게 요청하여 출력물을 봐야한다. 그러나.. script태그를 사용하면 해당 데이터는 더 이상 데이터가 아닌 하나의 스크립트로 간주하여 실제로 실행된다.
+
+![2020111601](https://user-images.githubusercontent.com/32003817/99250132-893d7b00-284e-11eb-9e39-81849060f2db.PNG)
