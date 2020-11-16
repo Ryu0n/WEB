@@ -4,6 +4,7 @@ var fs = require("fs");
 var qs = require("querystring");
 var path = require('path');
 var template = require('./lib/template')
+var sanitizeHtml = require('sanitize-html');
 
 var app = http.createServer(function (request, response) {
 
@@ -85,10 +86,12 @@ var app = http.createServer(function (request, response) {
     request.on("end", function () {
       var post = qs.parse(body);
       var title = post.title;
+      var sanitizedTitle = sanitizeHtml(title);
       var description = post.description;
+      var sanitizedDescription = sanitizeHtml(description);
 
-      fs.writeFile(`data/${title}`, description, "utf8", function (err) {
-        response.writeHead(302, { Location: `/?id=${title}` }); // 302 : redirection
+      fs.writeFile(`data/${sanitizedTitle}`, sanitizedDescription, "utf8", function (err) {
+        response.writeHead(302, { Location: `/?id=${sanitizedTitle}` }); // 302 : redirection
         response.end();
       });
     });

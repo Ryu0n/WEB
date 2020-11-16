@@ -569,7 +569,7 @@ location.href='https://www.naver.com/'
 ![2020111604](https://user-images.githubusercontent.com/32003817/99251596-f225f280-2850-11eb-9239-15dc84ff1fe4.PNG)
 
 다음 결과처럼 스크립트가 실행되는 것이 아닌 문자로써 스크립트의 내용을 그대로 출력하게 된다.
-이런 오염된 정보를 **소독(Sanitize)**해주는 모듈이 있다. npm을 통하여 sanitize-html을 다운로드하면 된다. 우선 현재 진행중인 애플리케이션 혹은 프로젝트를 npm으로 통해 관리하겠다는 명령어를 써야한다. 이것은 npm init이다. 패키지명은 현재 디렉터리를 기준으로 정해진다.
+이런 오염된 정보를 **소독**(Sanitize)해주는 모듈이 있다. npm을 통하여 sanitize-html을 다운로드하면 된다. 우선 현재 진행중인 애플리케이션 혹은 프로젝트를 npm으로 통해 관리하겠다는 명령어를 써야한다. 이것은 npm init이다. 패키지명은 현재 디렉터리를 기준으로 정해진다.
 
 ![2020111605](https://user-images.githubusercontent.com/32003817/99252969-3619f700-2853-11eb-9e10-62b7921ba475.PNG)
 
@@ -580,3 +580,12 @@ location.href='https://www.naver.com/'
 ![2020111607](https://user-images.githubusercontent.com/32003817/99253425-159e6c80-2854-11eb-80eb-0f99e7e9121e.PNG)
 
 그리고 package.json 파일을 확인해보면 dependencies 키를 확인할 수 있는데, 이는 현재 작업중인 프로젝트 및 **애플리케이션이 해당 모듈에 의존**하고 있다는 의미이다. (의존성)
+
+![2020111608](https://user-images.githubusercontent.com/32003817/99254592-eee13580-2855-11eb-9a09-69d14ecff0b6.PNG)
+
+sanitize-html 참고 링크 : https://www.npmjs.com/package/sanitize-html
+sanitizeHtml 객체를 통해 CREATE 영역에서 태그들을 소독한 결과이다.
+
+![2020111609](https://user-images.githubusercontent.com/32003817/99255017-9eb6a300-2856-11eb-958a-41c351eeb7c8.PNG)  
+![2020111610](https://user-images.githubusercontent.com/32003817/99255124-c9086080-2856-11eb-8921-7ae751719e91.PNG)  
+![2020111611](https://user-images.githubusercontent.com/32003817/99255145-d32a5f00-2856-11eb-97df-2dd86ddc627b.PNG)
